@@ -1,0 +1,33 @@
+import time 
+while True:
+    supply = float(input("supply?"))
+    demand = float(input("demand?"))
+    battery = float(input("current battery value"))
+    maxb = float(input("What is the max battery capacity"))
+    availb = maxb - battery
+#these would be inputed from a sensor, but for out testing purposes we input the values
+    if supply == demand :
+      # if the supply from energy sources is equal to the demand, then all the supply is used now
+      print ("supply and demand match, all supply is utilised")
+      # for testing the program the print funtion is used to show this rather than carrying out the action
+    elif supply > demand :
+      sd = supply - demand
+      if sd <= availb :
+        print ("give " + str(sd) + " to battery")
+      elif availb > 0 :
+        giveg = sd - availb
+        print ("give battery " + str(availb) + " and give " + str(giveg) + " to national grid")
+      else: 
+        print ("give " + str(sd) + " to grid")
+    elif supply < demand: 
+      # if the supply is less than the demand the difference is calculated (the excess energy we need). This is used to work out whether the battery has enough energy stored to power the demand
+      ds = demand - supply
+      if ds <= battery :
+        # if the stored energy is equal or greater than the excess energy needed then is drawn from the battery 
+        print ("draw " + str(ds) + " from battery")
+      else:
+        grid = ds - battery
+        # if the stored energy is less than the excess energy needed then the battery is used and excess drawn from the grid
+        print ("draw " + str(battery) + "from battery and " + str(grid) + " from grid")
+    time.sleep (3)
+    # will reasses automatically every 3 seconds
